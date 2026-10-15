@@ -1,0 +1,998 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Mamatha Bookstore</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root {
+            --green: #173f35;
+            --green-light: #285b4c;
+            --gold: #d5a84b;
+            --cream: #faf7ef;
+            --white: #ffffff;
+            --text: #26352f;
+            --muted: #727b74;
+            --border: #e9e5da;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            min-height: 82px;
+            padding: 15px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 3px 20px #173f350b;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--green);
+        }
+
+        .brand-icon {
+            width: 47px;
+            height: 47px;
+            border-radius: 14px;
+            background: var(--green);
+            color: var(--gold);
+            display: grid;
+            place-items: center;
+            font-size: 25px;
+        }
+
+        .brand h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 23px;
+            line-height: 1.2;
+        }
+
+        .brand small {
+            color: var(--muted);
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            font-size: 13px;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links .active {
+            color: #ad7b20;
+        }
+
+        .nav-links .nav-button {
+            padding: 11px 17px;
+            border-radius: 7px;
+            color: white;
+            background: var(--green);
+        }
+
+        .nav-links .nav-button:hover {
+            background: var(--green-light);
+            color: white;
+        }
+
+        /* BANNER: SAME HEIGHT AND BACKGROUND AS HOME PAGE */
+        .hero {
+            min-height: 550px;
+            display: flex;
+            align-items: center;
+            padding: 75px 8%;
+            color: white;
+            background:
+                linear-gradient(90deg, rgba(12,39,31,.94) 0%,
+                rgba(12,39,31,.76) 46%, rgba(12,39,31,.13) 100%),
+                url('images/about-banners.png')
+                center 48% / cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 680px;
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 17px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(42px, 5.5vw, 69px);
+            line-height: 1.12;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #f1ce80;
+        }
+
+        .hero p {
+            max-width: 510px;
+            color: #e2e9e4;
+            font-size: 16px;
+            margin-bottom: 28px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 23px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid transparent;
+            transition: .25s;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: #20372e;
+        }
+
+        .btn-gold:hover {
+            background: #f0c96f;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border-color: #ffffff80;
+            color: white;
+            margin-left: 8px;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--green);
+        }
+
+        /* GENERAL SECTIONS */
+        .section {
+            padding: 75px 7%;
+        }
+
+        .section-heading {
+            width: 100%;
+            text-align: center;
+            margin: 0 auto 38px;
+        }
+
+        .section-heading .eyebrow {
+            margin-bottom: 9px;
+        }
+
+        .section-heading h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--green);
+            font-size: clamp(30px, 4vw, 42px);
+            line-height: 1.25;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .section-heading p {
+            max-width: 600px;
+            margin: auto;
+            color: var(--muted);
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .gold-line {
+            width: 70px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 5px;
+            margin: 12px auto;
+        }
+
+        /* OUR STORY */
+        .story-section {
+            background: #fffdf8;
+        }
+
+        .story-container {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            align-items: center;
+            gap: 45px;
+        }
+
+        .story-image {
+            height: 390px;
+            overflow: hidden;
+            border-radius: 13px;
+            box-shadow: 0 12px 30px #173f3514;
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform .4s;
+        }
+
+        .story-image:hover img {
+            transform: scale(1.035);
+        }
+
+        .story-text h3 {
+            color: var(--green);
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            line-height: 1.3;
+            margin-bottom: 15px;
+        }
+
+        .story-text p {
+            color: #596b62;
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+
+        /* FOUNDER */
+        .founder-section {
+            background: #f1eee4;
+        }
+
+        .founder-card {
+            max-width: 1100px;
+            margin: auto;
+            padding: 28px;
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            align-items: center;
+            gap: 38px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px #173f350b;
+        }
+
+        /* LARGE PHOTO BOX: YOUR OWN PHOTO */
+        .founder-image {
+            width: 100%;
+            height: 430px;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #e8e1d2;
+            border: 4px solid #e4c778;
+        }
+
+        .founder-image img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .founder-text .eyebrow {
+            margin-bottom: 8px;
+        }
+
+        .founder-text h3 {
+            color: var(--green);
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin-bottom: 4px;
+        }
+
+        .founder-text .role {
+            color: #b58922;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .founder-text p {
+            color: #596b62;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .founder-quote {
+            margin-top: 20px;
+            padding: 17px 20px;
+            background: #f8f3e7;
+            border-left: 4px solid var(--gold);
+            border-radius: 0 8px 8px 0;
+            color: var(--green);
+            font-family: 'Playfair Display', serif;
+            font-size: 17px;
+        }
+
+        /* MISSION AND VISION */
+        .mission-vision-section {
+            background: #fffdf8;
+        }
+
+        .mission-vision-container {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .mission-card,
+        .vision-card {
+            padding: 32px;
+            background: #fcf9f1;
+            border: 1px solid #e6dac2;
+            border-radius: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: .25s;
+        }
+
+        .mission-card:hover,
+        .vision-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px #173f350d;
+        }
+
+        .card-icon {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gold);
+            color: white;
+            display: grid;
+            place-items: center;
+            font-size: 25px;
+        }
+
+        .mission-card h3,
+        .vision-card h3 {
+            color: var(--green);
+            font-family: 'Playfair Display', serif;
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        .mission-card p,
+        .vision-card p {
+            color: #596b62;
+            font-size: 14px;
+        }
+
+        /* WHY CHOOSE US */
+        .values-section {
+            background: #f1eee4;
+        }
+
+        .values-container {
+            max-width: 1150px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .value-card {
+            padding: 30px 22px;
+            text-align: center;
+            background: #fffdf8;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: .25s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px #173f3510;
+        }
+
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 17px;
+            border-radius: 50%;
+            background: var(--green);
+            color: var(--gold);
+            font-size: 25px;
+        }
+
+        .value-card h3 {
+            color: var(--green);
+            font-family: 'Playfair Display', serif;
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .value-card p {
+            color: #596b62;
+            font-size: 13px;
+        }
+
+        /* CALL TO ACTION */
+        .cta-section {
+            text-align: center;
+            padding: 65px 7%;
+            color: white;
+            background:
+                linear-gradient(rgba(12,39,31,.93), rgba(12,39,31,.93)),
+               url('images/about-banners.png')
+                center / cover no-repeat;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            color: #f1ce80;
+            font-size: clamp(28px, 4vw, 40px);
+            margin-bottom: 10px;
+        }
+
+        .cta-section p {
+            color: #e2e9e4;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #102d25;
+            color: white;
+            padding: 42px 7% 20px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 35px;
+            padding-bottom: 30px;
+        }
+
+        .footer-top h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 21px;
+            margin-bottom: 13px;
+            color: #f1ce80;
+        }
+
+        .footer-top p,
+        .footer-top a {
+            color: #c5d3ca;
+            font-size: 12px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 14px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            color: var(--gold);
+            font-size: 19px;
+        }
+
+        .copyright {
+            border-top: 1px solid #ffffff26;
+            padding-top: 18px;
+            color: #b8c8bd;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1000px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .story-container {
+                gap: 25px;
+            }
+
+            .founder-card {
+                grid-template-columns: 320px 1fr;
+                gap: 25px;
+            }
+
+            .founder-image {
+                height: 390px;
+            }
+
+            .mission-card,
+            .vision-card {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                padding: 15px 5%;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 11px;
+            }
+
+            .hero {
+                min-height: 550px;
+                padding: 55px 6%;
+                background-position: 60% center;
+            }
+
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .section {
+                padding: 55px 5%;
+            }
+
+            .story-container,
+            .founder-card,
+            .mission-vision-container,
+            .values-container {
+                grid-template-columns: 1fr;
+            }
+
+            .story-image {
+                height: 300px;
+            }
+
+            .founder-card {
+                padding: 20px;
+            }
+
+            .founder-image {
+                height: 420px;
+                max-width: 420px;
+                margin: auto;
+            }
+
+            .founder-text {
+                text-align: center;
+            }
+
+            .founder-quote {
+                text-align: left;
+            }
+
+            .mission-card,
+            .vision-card {
+                padding: 24px;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .brand h2 {
+                font-size: 20px;
+            }
+
+            .brand-icon {
+                width: 42px;
+                height: 42px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .btn {
+                padding: 12px 15px;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+            }
+
+            .founder-image {
+                height: 350px;
+            }
+
+            .mission-card,
+            .vision-card {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <a href="index.html" class="brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+            <div>
+                <h2>Mamatha Bookstore</h2>
+                <small>Read. Learn. Grow.</small>
+            </div>
+        </a>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a class="active" href="about.html">About Us</a>
+            <a href="list.html">View Books</a>
+            <a href="insert.html">Add Book</a>
+            <a href="update.html">Update</a>
+            <a href="delete.html">Delete</a>
+            <a class="nav-button" href="list.html">Explore Books ↗</a>
+        </nav>
+    </header>
+
+    <!-- HERO BANNER: SAME IMAGE AND 550PX HEIGHT AS HOME -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="eyebrow">Our Story • Our Passion</div>
+
+            <h1>Welcome to <span>Mamatha Bookstore.</span></h1>
+
+            <p>
+                Every book opens a new world. Discover knowledge,
+                imagination and inspiration in a place created
+                for every book lover.
+            </p>
+
+            <a href="list.html" class="btn btn-gold">
+                <i class="fa-solid fa-book-open"></i>
+                Explore Our Books →
+            </a>
+
+            <a href="#founder" class="btn btn-outline">
+                Meet Our Founder
+            </a>
+        </div>
+    </section>
+
+    <!-- OUR STORY -->
+    <section class="section story-section">
+        <div class="section-heading">
+            <div class="eyebrow">Who We Are</div>
+            <h2>Our Story</h2>
+            <div class="gold-line"></div>
+            <p>
+                Discover the story and passion behind
+                Mamatha Bookstore.
+            </p>
+        </div>
+
+        <div class="story-container">
+            <div class="story-image">
+                <img
+                    src="images/ourstory.png"
+                    alt="Bookshelves inside a welcoming bookstore">
+            </div>
+
+            <div class="story-text">
+                <h3>A Place for Every Book Lover</h3>
+
+                <p>
+                    Welcome to Mamatha Bookstore, a place created for
+                    readers, students and people who love learning.
+                    We believe books help people gain knowledge,
+                    explore new ideas and develop their imagination.
+                </p>
+
+                <p>
+                    Our bookstore brings different kinds of books
+                    together in one place. Whether you are looking
+                    for educational books, novels or books for
+                    personal development, we want to make your
+                    reading journey enjoyable.
+                </p>
+
+                <p>
+                    Our bookstore management website also makes
+                    book records easier to organize. Users can view,
+                    add, update and delete book information through
+                    a simple digital system.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOUNDER: YOUR PHOTO GOES HERE -->
+    <section class="section founder-section" id="founder">
+        <div class="section-heading">
+            <div class="eyebrow">The Person Behind Our Store</div>
+            <h2>Meet Our Founder</h2>
+            <div class="gold-line"></div>
+            <p>
+                A passion for books, learning and making
+                knowledge easier to discover.
+            </p>
+        </div>
+
+        <div class="founder-card">
+            <div class="founder-image">
+                <!-- Put your own photo at public/images/mamatha.jpg -->
+                <img
+                    src="images/mamatha.png"
+                    alt="Mamatha, Founder of Mamatha Bookstore">
+            </div>
+
+            <div class="founder-text">
+                <div class="eyebrow">Founder &amp; Creator</div>
+
+                <h3>Mamatha</h3>
+
+                <div class="role">Founder of Mamatha Bookstore</div>
+
+                <p>
+                    Mamatha Bookstore was created with a passion for
+                    books, learning and knowledge. The aim is to
+                    provide readers with a welcoming place to
+                    discover books and new ideas.
+                </p>
+
+                <p>
+                    This bookstore management website brings
+                    technology and book management together.
+                    It is designed to make book information
+                    easier to organize and maintain.
+                </p>
+
+                <p>
+                    Every book has something to teach, and every
+                    reader deserves the opportunity to discover
+                    something new.
+                </p>
+
+                <div class="founder-quote">
+                    "A love for reading opens the door
+                    to a world of possibilities."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION AND VISION -->
+    <section class="section mission-vision-section">
+        <div class="section-heading">
+            <div class="eyebrow">Our Purpose</div>
+            <h2>Our Mission &amp; Vision</h2>
+            <div class="gold-line"></div>
+            <p>
+                What we believe in and what we want
+                Mamatha Bookstore to achieve.
+            </p>
+        </div>
+
+        <div class="mission-vision-container">
+            <div class="mission-card">
+                <div class="card-icon">
+                    <i class="fa-solid fa-bullseye"></i>
+                </div>
+
+                <div>
+                    <h3>Our Mission</h3>
+                    <p>
+                        Our mission is to make books easy to discover
+                        and book information easy to manage. We aim
+                        to encourage reading, support learning and
+                        provide a convenient experience for book lovers.
+                    </p>
+                </div>
+            </div>
+
+            <div class="vision-card">
+                <div class="card-icon">
+                    <i class="fa-solid fa-eye"></i>
+                </div>
+
+                <div>
+                    <h3>Our Vision</h3>
+                    <p>
+                        Our vision is to create a welcoming bookstore
+                        where people can explore different books,
+                        gain knowledge and develop a lifelong love
+                        of reading. We hope to make book management
+                        simpler through technology.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="section values-section">
+        <div class="section-heading">
+            <div class="eyebrow">What Makes Us Special</div>
+            <h2>Why Choose Us?</h2>
+            <div class="gold-line"></div>
+            <p>
+                Making your bookstore experience simple,
+                convenient and enjoyable.
+            </p>
+        </div>
+
+        <div class="values-container">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <h3>Wide Book Choices</h3>
+                <p>
+                    Explore books from different categories
+                    and discover something new to read.
+                </p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fa-solid fa-laptop"></i>
+                </div>
+
+                <h3>Easy Management</h3>
+                <p>
+                    View, add, update and delete book records
+                    using our bookstore management system.
+                </p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <h3>Love for Reading</h3>
+                <p>
+                    We believe reading inspires creativity,
+                    improves knowledge and opens new possibilities.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="cta-section">
+        <h2>Find Your Next Favourite Book</h2>
+        <p>
+            Explore our collection and begin your next reading journey.
+        </p>
+
+        <a href="list.html" class="btn btn-gold">
+            <i class="fa-solid fa-book-open"></i>
+            Explore Books →
+        </a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div>
+                <h3>
+                    <i class="fa-solid fa-book-open"></i>
+                    Mamatha Bookstore
+                </h3>
+
+                <p>
+                    A place for stories, knowledge and inspiration.
+                    Discover books, explore new ideas and make
+                    reading a part of everyday life.
+                </p>
+
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" aria-label="X">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h3>Quick Links</h3>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="list.html">View Books</a>
+                    <a href="insert.html">Add Book</a>
+                </div>
+            </div>
+
+            <div>
+                <h3>Management</h3>
+                <div class="footer-links">
+                    <a href="list.html">Book Collection</a>
+                    <a href="update.html">Update Book</a>
+                    <a href="delete.html">Delete Book</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            © 2026 Mamatha Bookstore Management. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

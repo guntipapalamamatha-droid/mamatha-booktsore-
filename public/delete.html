@@ -1,0 +1,598 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Book | Mamatha Bookstore</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f8f5ed;
+            color: #123e32;
+        }
+
+        /* Header - Same as update.html */
+        .navbar {
+            background: #fffdf8;
+            padding: 16px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px #00000010;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #173f35;
+        }
+
+        .brand-icon {
+            width: 46px;
+            height: 46px;
+            background: #173f35;
+            color: #d5a84b;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .brand-text h2 {
+            font-family: Georgia, serif;
+            font-size: 22px;
+            color: #173f35;
+            margin: 0;
+        }
+
+        .brand-text small {
+            color: #727b74;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #123e32;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #d5a84b;
+        }
+
+        /* Banner */
+        .page-banner {
+            min-height: 480px;
+            background:
+                linear-gradient(90deg, #003d30d9, #003d3030),
+                url("/images/delete-banner.png") center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            padding: 60px 8%;
+            color: white;
+        }
+
+        .banner-content {
+            max-width: 650px;
+        }
+
+        .banner-content p {
+            color: #ffc43b;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .banner-content h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(36px, 5vw, 54px);
+            margin-bottom: 18px;
+        }
+
+        .banner-content h3 {
+            font-size: 18px;
+            font-weight: normal;
+            line-height: 1.6;
+        }
+
+        /* Main content */
+        .main-container {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 25px;
+            display: grid;
+            grid-template-columns: 0.9fr 1.2fr;
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        /* Image beside form */
+        .side-image {
+            min-height: 520px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .side-image img {
+            width: 100%;
+            height: 100%;
+            min-height: 520px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Delete form */
+        .form-container {
+            background: #fffdf8;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 18px #0000000d;
+            border: 1px solid #eee7d9;
+        }
+
+        .small-heading {
+            color: #c88a08;
+            letter-spacing: 2px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .form-container h2 {
+            font-family: Georgia, serif;
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            color: #687771;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 22px;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d9ded8;
+            border-radius: 6px;
+            font-size: 14px;
+            background: #fff;
+            outline: none;
+        }
+
+        select:focus {
+            border-color: #0b5745;
+            box-shadow: 0 0 0 2px #0b57451a;
+        }
+
+        .delete-btn {
+            width: 100%;
+            padding: 14px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            background: #a52a2a;
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background: #7d1f1f;
+        }
+
+        .delete-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .back-btn {
+            display: block;
+            margin-top: 15px;
+            padding: 13px;
+            border-radius: 6px;
+            text-align: center;
+            text-decoration: none;
+            background: #efe7d8;
+            color: #123e32;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            background: #e4d7bf;
+        }
+
+        .message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            line-height: 1.5;
+            display: none;
+        }
+
+        .success {
+            display: block;
+            background: #e5f5e9;
+            color: #176334;
+        }
+
+        .error {
+            display: block;
+            background: #ffeded;
+            color: #a32121;
+        }
+
+        .info {
+            display: block;
+            background: #f0f2f1;
+            color: #52615d;
+        }
+
+        /* Footer */
+        footer {
+            background: #102d25;
+            color: white;
+            padding: 43px 7% 20px;
+            margin-top: 30px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 35px;
+            padding-bottom: 30px;
+        }
+
+        .footer-top h3 {
+            font-family: Georgia, serif;
+            font-size: 21px;
+            margin-bottom: 13px;
+            color: #f1ce80;
+        }
+
+        .footer-top p,
+        .footer-top a {
+            color: #c5d3ca;
+            font-size: 12px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #d5a84b;
+        }
+
+        .copyright {
+            border-top: 1px solid #ffffff26;
+            padding-top: 18px;
+            color: #b8c8bd;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        /* Responsive design */
+        @media (max-width: 850px) {
+            .navbar {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .side-image,
+            .side-image img {
+                min-height: 350px;
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page-banner {
+                min-height: 400px;
+                padding: 35px 22px;
+            }
+
+            .banner-content h1 {
+                font-size: 36px;
+            }
+
+            .banner-content h3 {
+                font-size: 16px;
+            }
+
+            .main-container {
+                margin: 20px auto;
+                padding: 0 15px;
+            }
+
+            .form-container {
+                padding: 20px 16px;
+            }
+
+            .form-container h2 {
+                font-size: 29px;
+            }
+
+            .brand-text h2 {
+                font-size: 19px;
+            }
+
+            .navbar {
+                padding: 15px 5%;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <a href="index.html" class="brand">
+        <div class="brand-icon">📚</div>
+        <div class="brand-text">
+            <h2>Mamatha Bookstore</h2>
+            <small>Read. Learn. Grow.</small>
+        </div>
+    </a>
+
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="list.html">View Books</a>
+        <a href="insert.html">Add Book</a>
+        <a href="update.html">Update</a>
+        <a href="delete.html" class="active">Delete</a>
+    </nav>
+</header>
+
+<section class="page-banner">
+    <div class="banner-content">
+        <p>BOOK MANAGEMENT</p>
+        <h1>Delete Book</h1>
+        <h3>Remove a selected book from your bookstore collection safely and easily.</h3>
+    </div>
+</section>
+
+<main class="main-container">
+
+    <div class="side-image">
+        <img src="/images/delete-books.png"
+             alt="Books arranged in a beautiful library">
+    </div>
+
+    <section class="form-container">
+        <p class="small-heading">BOOK MANAGEMENT</p>
+        <h2>Delete Book</h2>
+
+        <p class="description">
+            Select the Book ID you want to delete.
+            The complete row associated with that ID will be removed
+            from the database.
+        </p>
+
+        <form id="deleteForm">
+            <div class="form-group">
+                <label for="book_id">Book ID *</label>
+
+                <select id="book_id" name="book_id" required>
+                    <option value="">Loading Book IDs...</option>
+                </select>
+            </div>
+
+            <button type="submit" class="delete-btn">
+                <i class="fa-solid fa-trash"></i> Delete Book
+            </button>
+
+            <a href="list.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i> Back to Book List
+            </a>
+
+            <div id="message" class="message" role="status"></div>
+        </form>
+    </section>
+
+</main>
+
+<footer>
+    <div class="footer-top">
+        <div>
+            <h3>📚 Mamatha Bookstore</h3>
+            <p>A place for stories, knowledge and inspiration. Discover books and manage your collection in one place.</p>
+        </div>
+
+        <div>
+            <h3>Quick Links</h3>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="list.html">View Books</a>
+            </div>
+        </div>
+
+        <div>
+            <h3>Book Management</h3>
+            <div class="footer-links">
+                <a href="insert.html">Add Book</a>
+                <a href="update.html">Update Book</a>
+                <a href="delete.html">Delete Book</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright">
+        © 2026 Mamatha Bookstore Management. All rights reserved.
+    </div>
+</footer>
+
+<script>
+    const form = document.getElementById("deleteForm");
+    const bookIdSelect = document.getElementById("book_id");
+    const message = document.getElementById("message");
+    const deleteButton = form.querySelector(".delete-btn");
+
+    function showMessage(text, type) {
+        message.textContent = text;
+        message.className = "message " + type;
+    }
+
+    // Load Book IDs
+    async function loadBookIds() {
+        bookIdSelect.innerHTML =
+            '<option value="">Loading Book IDs...</option>';
+
+        try {
+            const response = await fetch("/books");
+
+            if (!response.ok) {
+                throw new Error("Unable to load Book IDs.");
+            }
+
+            const books = await response.json();
+
+            bookIdSelect.innerHTML =
+                '<option value="">Select Book ID</option>';
+
+            books.forEach(book => {
+                const option = document.createElement("option");
+                option.value = book.book_id;
+                option.textContent = book.book_id;
+                bookIdSelect.appendChild(option);
+            });
+
+            if (books.length === 0) {
+                showMessage("No books found in the database.", "info");
+            }
+        } catch (error) {
+            bookIdSelect.innerHTML =
+                '<option value="">Unable to load Book IDs</option>';
+
+            showMessage(
+                "Could not load Book IDs. Check your server and API route.",
+                "error"
+            );
+        }
+    }
+
+    // Delete the selected book
+    form.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const bookId = bookIdSelect.value;
+
+        if (!bookId) {
+            showMessage("Please select a Book ID.", "error");
+            return;
+        }
+
+        const confirmed = confirm(
+            `Are you sure you want to delete Book ID ${bookId}? This will remove its complete row from the database.`
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        deleteButton.disabled = true;
+        deleteButton.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin"></i> Deleting...';
+
+        try {
+            const response = await fetch(
+                "/books/" + encodeURIComponent(bookId),
+                { method: "DELETE" }
+            );
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    result.message || "Book deletion failed."
+                );
+            }
+
+            showMessage("Book deleted successfully!", "success");
+
+            await loadBookIds();
+        } catch (error) {
+            showMessage(
+                error.message || "Unable to delete the book.",
+                "error"
+            );
+        } finally {
+            deleteButton.disabled = false;
+            deleteButton.innerHTML =
+                '<i class="fa-solid fa-trash"></i> Delete Book';
+        }
+    });
+
+    loadBookIds();
+</script>
+
+</body>
+</html>

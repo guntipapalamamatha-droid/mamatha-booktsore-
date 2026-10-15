@@ -1,0 +1,877 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Books | Mamatha Bookstore</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --green: #173f35;
+    --gold: #d5a84b;
+    --cream: #faf7ef;
+    --text: #26352f;
+    --muted: #727b74;
+    --border: #e9e5da;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button, input, select { font: inherit; }
+
+.navbar {
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 3px 20px #173f3510;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--green);
+}
+
+.brand-icon {
+    width: 47px;
+    height: 47px;
+    border-radius: 12px;
+    background: var(--green);
+    color: var(--gold);
+    display: grid;
+    place-items: center;
+    font-size: 25px;
+}
+
+.brand h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+}
+
+.brand small {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 17px;
+}
+
+.nav-links a {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.nav-links a:hover,
+.nav-links .active { color: #ad7b20; }
+
+.hero {
+    min-height: 430px;
+    display: flex;
+    align-items: center;
+    padding: 65px 8%;
+    color: white;
+    background:
+        linear-gradient(90deg, rgba(12,39,31,.94), rgba(12,39,31,.65), rgba(12,39,31,.15)),
+        url('images/view-banner.png') center 48% / cover no-repeat;
+}
+
+.hero-content { max-width: 680px; }
+
+.eyebrow {
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 5vw, 59px);
+    line-height: 1.15;
+    margin-bottom: 18px;
+}
+
+.hero h1 span { color: #f1ce80; }
+
+.hero p {
+    max-width: 520px;
+    color: #e2e9e4;
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 13px 22px;
+    border: none;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn-gold {
+    background: var(--gold);
+    color: var(--green);
+}
+
+.btn-gold:hover {
+    background: #f0c96f;
+    transform: translateY(-2px);
+}
+
+.section { padding: 65px 7%; }
+
+.section-heading {
+    text-align: center;
+    margin: 0 auto 35px;
+    max-width: 720px;
+}
+
+.section-heading .eyebrow { color: #a77b25; }
+
+.section-heading h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--green);
+    font-size: clamp(32px, 4vw, 44px);
+    margin-bottom: 10px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.gold-line {
+    width: 65px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 5px;
+    margin: 13px auto;
+}
+
+.collection-count {
+    display: inline-block;
+    margin-top: 18px;
+    background: #eaf1e9;
+    color: var(--green);
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.collection-highlights {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 17px;
+}
+
+.highlight-pill {
+    padding: 8px 13px;
+    border: 1px solid var(--border);
+    background: white;
+    border-radius: 30px;
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 48px;
+}
+
+.category-card {
+    position: relative;
+    height: 225px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--green);
+    box-shadow: 0 8px 22px #173f3515;
+}
+
+.category-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .4s;
+}
+
+.category-card:hover img { transform: scale(1.07); }
+
+.category-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(12,39,31,.95), rgba(12,39,31,.25), transparent);
+}
+
+.category-card-content {
+    position: absolute;
+    z-index: 1;
+    bottom: 17px;
+    left: 17px;
+    right: 12px;
+    color: white;
+}
+
+.category-card-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+}
+
+.category-card-content p {
+    font-size: 11px;
+    color: #f0eee7;
+}
+
+.category-card-content span {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #f1ce80;
+}
+
+.filter-panel {
+    max-width: 1000px;
+    margin: 0 auto 20px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 14px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.filter-panel input,
+.filter-panel select {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    outline: none;
+    background: #fdfcf9;
+    color: var(--text);
+    font-size: 13px;
+}
+
+.filter-panel input:focus,
+.filter-panel select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px #d5a84b20;
+}
+
+.results-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin: 0 auto 16px;
+    max-width: 1000px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.results-row strong { color: var(--green); }
+
+.reset-button {
+    background: transparent;
+    border: none;
+    color: #94701f;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.table-card {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 8px 25px #173f3508;
+}
+
+.table-heading-row { margin-bottom: 20px; }
+
+.table-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 23px;
+    color: var(--green);
+}
+
+.table-description {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+}
+
+.books-table {
+    width: 100%;
+    min-width: 750px;
+    border-collapse: collapse;
+    background: white;
+}
+
+.books-table thead {
+    background: var(--green);
+    color: white;
+}
+
+.books-table th {
+    padding: 16px 14px;
+    text-align: left;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.books-table td {
+    padding: 15px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+
+.books-table tbody tr:nth-child(even) { background: #faf7ef; }
+.books-table tbody tr:hover { background: #edf4ec; }
+.books-table tbody tr:last-child td { border-bottom: none; }
+
+.book-id {
+    color: #a77b25;
+    font-weight: 700;
+}
+
+.book-title,
+.book-price {
+    color: var(--green);
+    font-weight: 700;
+}
+
+.book-price { white-space: nowrap; }
+
+.stock-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #eaf3e9;
+    color: #267747;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.stock-badge.low {
+    background: #fff2da;
+    color: #966a15;
+}
+
+.stock-badge.out {
+    background: #fbe9e7;
+    color: #ad3930;
+}
+
+.table-message {
+    text-align: center;
+    padding: 35px !important;
+    color: var(--muted);
+}
+
+.reading-banner {
+    margin: 0 7% 65px;
+    padding: 38px 40px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, rgba(23,63,53,.95), rgba(23,63,53,.72)),
+    url('https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1400&q=85') center/cover;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.reading-banner h2 {
+    font-family: 'Playfair Display', serif;
+    color: #f1ce80;
+    font-size: 27px;
+    margin-bottom: 6px;
+}
+
+.reading-banner p {
+    font-size: 12px;
+    color: #e0e8e2;
+}
+
+footer {
+    background: #102d25;
+    color: white;
+    padding: 43px 7% 20px;
+}
+
+.footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 35px;
+    padding-bottom: 30px;
+}
+
+.footer-top h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+    margin-bottom: 13px;
+    color: #f1ce80;
+}
+
+.footer-top p,
+.footer-top a {
+    color: #c5d3ca;
+    font-size: 12px;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-links a:hover { color: var(--gold); }
+
+.copyright {
+    border-top: 1px solid #ffffff26;
+    padding-top: 18px;
+    color: #b8c8bd;
+    font-size: 11px;
+    text-align: center;
+}
+
+@media (max-width: 1050px) {
+    .navbar { flex-direction: column; }
+    .nav-links { justify-content: center; }
+    .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 650px) {
+    .navbar { padding: 15px 5%; }
+    .nav-links { justify-content: center; gap: 12px; }
+    .hero {
+        min-height: 370px;
+        padding: 45px 6%;
+        background-position: 60% center;
+    }
+    .hero h1 { font-size: 38px; }
+    .section { padding: 45px 5%; }
+    .filter-panel { grid-template-columns: 1fr; padding: 14px; }
+    .table-card { padding: 13px; }
+    .reading-banner {
+        margin: 0 5% 45px;
+        padding: 25px 20px;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .footer-top { grid-template-columns: 1fr; gap: 25px; }
+}
+
+@media (max-width: 420px) {
+    .category-grid { gap: 10px; }
+    .category-card { height: 180px; }
+    .category-card-content { left: 12px; bottom: 12px; }
+    .category-card-content h3 { font-size: 18px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <a href="index.html" class="brand">
+        <div class="brand-icon">📚</div>
+        <div>
+            <h2>Mamatha Bookstore</h2>
+            <small>Read. Learn. Grow.</small>
+        </div>
+    </a>
+
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a class="active" href="list.html">View Books</a>
+        <a href="insert.html">Add Book</a>
+        <a href="update.html">Update</a>
+        <a href="delete.html">Delete</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="eyebrow">A World Between the Pages</div>
+        <h1>Discover Your Next <span>Favourite Book.</span></h1>
+        <p>Explore inspiring ideas, unforgettable stories and knowledge that opens new doors. Your next favourite book is waiting for you.</p>
+        <a href="#collection" class="btn btn-gold">Explore Collection ↓</a>
+    </div>
+</section>
+
+<main class="section" id="collection">
+    <div class="section-heading">
+        <div class="eyebrow">Find Your Next Read</div>
+        <h2>Our Book Collection</h2>
+        <div class="gold-line"></div>
+        <p>From exciting stories to educational resources, explore our collection and find a book that inspires you. Book details are loaded from our bookstore database.</p>
+        <div class="collection-count" id="collectionCount">Loading collection...</div>
+        <div class="collection-highlights">
+            <span class="highlight-pill">📖 Stories & Imagination</span>
+            <span class="highlight-pill">🎓 Learning & Knowledge</span>
+            <span class="highlight-pill">🌟 Something for Every Reader</span>
+        </div>
+    </div>
+
+    <div class="category-grid">
+        <a href="#bookInventory" class="category-card" data-category="Fiction">
+            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=700&q=85" alt="Fiction books">
+            <div class="category-card-content">
+                <h3>Fiction</h3>
+                <p>Stories that spark imagination</p>
+                <span>EXPLORE BOOKS ↗</span>
+            </div>
+        </a>
+
+        <a href="#bookInventory" class="category-card" data-category="Education">
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=700&q=85" alt="Education books">
+            <div class="category-card-content">
+                <h3>Education</h3>
+                <p>Learn something new every day</p>
+                <span>EXPLORE BOOKS ↗</span>
+            </div>
+        </a>
+
+        <a href="#bookInventory" class="category-card" data-category="Science">
+            <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=700&q=85" alt="Science books">
+            <div class="category-card-content">
+                <h3>Science</h3>
+                <p>Explore ideas and discoveries</p>
+                <span>EXPLORE BOOKS ↗</span>
+            </div>
+        </a>
+
+        <a href="#bookInventory" class="category-card" data-category="Literature">
+            <img src="https://images.unsplash.com/photo-1476275466078-4007374ef537?auto=format&fit=crop&w=700&q=85" alt="Literature books">
+            <div class="category-card-content">
+                <h3>Literature</h3>
+                <p>Discover timeless classics</p>
+                <span>EXPLORE BOOKS ↗</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="filter-panel">
+        <input type="search" id="searchInput" placeholder="Search by book title or author..." aria-label="Search books">
+        <select id="categoryFilter" aria-label="Filter by category">
+            <option value="">All Categories</option>
+        </select>
+    </div>
+
+    <div class="results-row">
+        <span id="resultsText">Loading books...</span>
+        <button class="reset-button" id="resetButton" type="button">Reset Filters ↺</button>
+    </div>
+
+    <div class="table-card" id="bookInventory">
+        <div class="table-heading-row">
+            <h3 class="table-title">Book Inventory</h3>
+            <p class="table-description">Books stored in your bookstore database.</p>
+        </div>
+
+        <div class="table-wrap">
+            <table class="books-table">
+                <thead>
+                    <tr>
+                        <th>Book ID</th>
+                        <th>Book Title</th>
+                        <th>Author</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Stock </th>
+                    </tr>
+                </thead>
+                <tbody id="bookTable">
+                    <tr>
+                        <td colspan="6" class="table-message">Loading books from database...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<section class="reading-banner">
+    <div>
+        <div class="eyebrow">Your Next Chapter Starts Here</div>
+        <h2>Every Book Opens a New World.</h2>
+        <p>Find inspiration, explore new ideas and discover your next favourite read.</p>
+    </div>
+    <a href="#collection" class="btn btn-gold">Explore Collection ↑</a>
+</section>
+
+<footer>
+    <div class="footer-top">
+        <div>
+            <h3>📚 Mamatha Bookstore</h3>
+            <p>A place for stories, knowledge and inspiration. Discover books and manage your collection in one place.</p>
+        </div>
+        <div>
+            <h3>Quick Links</h3>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="list.html">View Books</a>
+            </div>
+        </div>
+        <div>
+            <h3>Book Management</h3>
+            <div class="footer-links">
+                <a href="insert.html">Add Book</a>
+                <a href="update.html">Update Book</a>
+                <a href="delete.html">Delete Book</a>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">© 2026 Mamatha Bookstore Management. All rights reserved.</div>
+</footer>
+
+<script>
+let allBooks = [];
+
+function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+}
+
+function getTitle(book) {
+    return book.title ?? book.book_name ?? book.name ?? "";
+}
+
+function getStock(book) {
+    const value = Number(book.stock ?? book.quantity ?? 0);
+    return Number.isFinite(value) ? value : 0;
+}
+
+function formatMoney(value) {
+    const amount = Number(value ?? 0);
+    return Number.isFinite(amount)
+        ? "₹" + amount.toLocaleString("en-IN", { maximumFractionDigits: 2 })
+        : "₹0";
+}
+
+function populateCategories() {
+    const select = document.getElementById("categoryFilter");
+    const categories = [
+        ...new Set(
+            allBooks
+                .map(book => String(book.category ?? "").trim())
+                .filter(Boolean)
+        )
+    ].sort((a, b) => a.localeCompare(b));
+
+    select.innerHTML =
+        '<option value="">All Categories</option>' +
+        categories.map(category =>
+            `<option value="${escapeHTML(category)}">${escapeHTML(category)}</option>`
+        ).join("");
+}
+
+function displayBooks(books) {
+    const table = document.getElementById("bookTable");
+
+    document.getElementById("collectionCount").textContent =
+        `${allBooks.length} ${allBooks.length === 1 ? "Book" : "Books"} in Our Collection`;
+
+    document.getElementById("resultsText").innerHTML =
+        `Showing <strong>${books.length}</strong> of <strong>${allBooks.length}</strong> books`;
+
+    if (!books.length) {
+        table.innerHTML = `
+            <tr>
+                <td colspan="6" class="table-message">
+                    No books found. Try another search or category.
+                </td>
+            </tr>`;
+        return;
+    }
+
+    table.innerHTML = books.map(book => {
+        const id = book.book_id ?? book.id;
+        const title = getTitle(book);
+        const author = book.author ?? book.author_name ?? "";
+        const category = book.category ?? "";
+        const price = book.price ?? book.book_price ?? 0;
+        const stock = getStock(book);
+
+        let stockClass = "";
+        let stockText = "Available";
+
+        if (stock <= 0) {
+            stockClass = "out";
+            stockText = "Out of Stock";
+        } else if (stock <= 5) {
+            stockClass = "low";
+            stockText = "Low Stock";
+        }
+
+        return `
+            <tr>
+                <td class="book-id">${escapeHTML(id ?? "—")}</td>
+                <td class="book-title">${escapeHTML(title || "Untitled")}</td>
+                <td>${escapeHTML(author || "—")}</td>
+                <td>${escapeHTML(category || "—")}</td>
+                <td class="book-price">${formatMoney(price)}</td>
+                <td>
+                    <span class="stock-badge ${stockClass}">
+                        ${stockText} (${escapeHTML(stock)})
+                    </span>
+                </td>
+            </tr>`;
+    }).join("");
+}
+
+function applyFilters() {
+    const query = document.getElementById("searchInput").value.trim().toLowerCase();
+    const category = document.getElementById("categoryFilter").value.toLowerCase();
+
+    const filtered = allBooks.filter(book => {
+        const title = String(getTitle(book)).toLowerCase();
+        const author = String(book.author ?? book.author_name ?? "").toLowerCase();
+        const bookCategory = String(book.category ?? "").toLowerCase();
+
+        return (title.includes(query) || author.includes(query)) &&
+               (!category || bookCategory === category);
+    });
+
+    displayBooks(filtered);
+}
+
+async function loadBooks() {
+    const table = document.getElementById("bookTable");
+
+    table.innerHTML = `
+        <tr>
+            <td colspan="6" class="table-message">Loading books...</td>
+        </tr>`;
+
+    try {
+        const response = await fetch("/books");
+
+        if (!response.ok) {
+            throw new Error("Server status: " + response.status);
+        }
+
+        const data = await response.json();
+
+        if (!Array.isArray(data)) {
+            throw new Error("/books did not return an array");
+        }
+
+        allBooks = data;
+        populateCategories();
+        applyFilters();
+
+    } catch (error) {
+        console.error("Book loading error:", error);
+
+        document.getElementById("collectionCount").textContent = "Collection unavailable";
+        document.getElementById("resultsText").textContent = "Unable to load books";
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="6" class="table-message">
+                    Books could not be loaded. Check that your Node.js server is running and the /books API returns book records.
+                </td>
+            </tr>`;
+    }
+}
+
+document.getElementById("searchInput")
+    .addEventListener("input", applyFilters);
+
+document.getElementById("categoryFilter")
+    .addEventListener("change", applyFilters);
+
+document.getElementById("resetButton")
+    .addEventListener("click", () => {
+        document.getElementById("searchInput").value = "";
+        document.getElementById("categoryFilter").value = "";
+        applyFilters();
+    });
+
+document.querySelectorAll(".category-card").forEach(card => {
+    card.addEventListener("click", () => {
+        const requested = card.dataset.category.toLowerCase();
+        const select = document.getElementById("categoryFilter");
+
+        const match = [...select.options].find(option =>
+            option.value.toLowerCase() === requested
+        );
+
+        select.value = match ? match.value : "";
+        applyFilters();
+    });
+});
+
+loadBooks();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,689 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Book | Mamatha Bookstore</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --green: #173f35;
+    --gold: #d5a84b;
+    --cream: #faf7ef;
+    --text: #26352f;
+    --muted: #727b74;
+    --border: #e9e5da;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* HEADER */
+.navbar {
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    background: white;
+    box-shadow: 0 3px 20px #173f3510;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--green);
+}
+
+.brand-icon {
+    width: 47px;
+    height: 47px;
+    border-radius: 12px;
+    background: var(--green);
+    color: var(--gold);
+    display: grid;
+    place-items: center;
+    font-size: 25px;
+}
+
+.brand h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+}
+
+.brand small {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+}
+
+.nav-links a {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.nav-links a:hover,
+.nav-links .active {
+    color: #ad7b20;
+}
+
+/* TOP BANNER - HEIGHT UNCHANGED */
+.page-banner {
+    min-height: 480px !important;
+    padding: 100px 7%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    background:
+        linear-gradient(90deg, rgba(12,39,31,.65), rgba(12,39,31,.25)),
+        url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1600&q=85')
+        center center / cover no-repeat;
+}
+
+.page-banner .eyebrow {
+    color: #f1ce80;
+    letter-spacing: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.page-banner h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 48px);
+    margin-bottom: 10px;
+}
+
+.page-banner p {
+    color: #e2e9e4;
+    max-width: 600px;
+    font-size: 14px;
+}
+
+/* FORM SECTION */
+main {
+    padding: 45px 7% 70px;
+}
+
+.form-layout {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.image-card {
+    height: 600px;
+    min-height: 600px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    background: var(--green);
+    box-shadow: 0 12px 30px #173f3515;
+    margin-top: 20px;
+}
+
+.image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    inset: 0;
+}
+
+.image-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(12,39,31,.96),
+        rgba(12,39,31,.2),
+        transparent
+    );
+}
+
+.image-content {
+    position: absolute;
+    z-index: 1;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    color: white;
+}
+
+.image-content .book-icon {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.image-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 27px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    color: #f1ce80;
+}
+
+.image-content p {
+    color: #e2e9e4;
+    font-size: 13px;
+}
+
+/* FORM CARD */
+.form-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 12px 30px #173f3508;
+}
+
+.form-heading {
+    margin-bottom: 25px;
+}
+
+.form-heading .eyebrow {
+    color: #a77b25;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.form-heading h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--green);
+    font-size: 29px;
+    margin: 5px 0 8px;
+}
+
+.form-heading p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+.form-group label {
+    display: block;
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 13px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    outline: none;
+    background: #fdfcf9;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px #d5a84b20;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 13px 20px;
+    border: none;
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-primary {
+    flex: 1;
+    background: var(--green);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #245b4b;
+}
+
+.btn-secondary {
+    background: #f0ede4;
+    color: var(--green);
+}
+
+.btn-secondary:hover {
+    background: #e6dfcf;
+}
+
+.message {
+    display: none;
+    margin-top: 18px;
+    padding: 12px;
+    border-radius: 7px;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.message.success {
+    display: block;
+    background: #eaf3e9;
+    color: #267747;
+}
+
+.message.error {
+    display: block;
+    background: #fbe9e7;
+    color: #ad3930;
+}
+
+/* FOOTER - MATCHES LIST.HTML */
+footer {
+    background: #102d25;
+    color: white;
+    padding: 43px 7% 20px;
+}
+
+.footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 35px;
+    padding-bottom: 30px;
+}
+
+.footer-top h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+    margin-bottom: 13px;
+    color: #f1ce80;
+}
+
+.footer-top p,
+.footer-top a {
+    color: #c5d3ca;
+    font-size: 12px;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-links a:hover {
+    color: var(--gold);
+}
+
+.copyright {
+    border-top: 1px solid #ffffff26;
+    padding-top: 18px;
+    color: #b8c8bd;
+    font-size: 11px;
+    text-align: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 850px) {
+    .navbar {
+        flex-direction: column;
+    }
+
+    .form-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .image-card {
+        height: 520px;
+        min-height: 520px;
+    }
+
+    .form-card {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 650px) {
+    .footer-top {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+}
+
+@media (max-width: 500px) {
+    .navbar {
+        padding: 15px 5%;
+    }
+
+    .nav-links {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    /* Original mobile banner height retained */
+    .page-banner {
+        min-height: 400px !important;
+        padding: 65px 5% 45px;
+    }
+
+    main {
+        padding: 35px 5% 45px;
+    }
+
+    .image-card {
+        height: 400px;
+        min-height: 380px;
+       
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-card {
+        padding: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <a href="index.html" class="brand">
+        <div class="brand-icon">📚</div>
+        <div>
+            <h2>Mamatha Bookstore</h2>
+            <small>Read. Learn. Grow.</small>
+        </div>
+    </a>
+
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="list.html">View Books</a>
+        <a href="insert.html" class="active">Add Book</a>
+        <a href="update.html">Update</a>
+        <a href="delete.html">Delete</a>
+    </nav>
+</header>
+
+<section class="page-banner">
+    <div class="eyebrow">Grow Your Collection</div>
+    <h1>Add a New Book</h1>
+    <p>Add books to your collection and keep your bookstore inventory organised in one place.</p>
+</section>
+
+<main>
+    <div class="form-layout">
+
+        <section class="image-card">
+            <!-- Replace this path with your generated image -->
+            <img
+                src="images/insert-story.png"
+                alt="Our Story - Mamatha Bookstore"
+                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1000&q=85';">
+
+            <div class="image-content">
+                <div class="book-icon">📖</div>
+                <h2>Every Book Has a Story.</h2>
+                <p>Give another wonderful book a place in the Mamatha Bookstore collection.</p>
+            </div>
+        </section>
+
+        <section class="form-card">
+            <div class="form-heading">
+                <div class="eyebrow">Book Management</div>
+                <h2>Book Details</h2>
+                <p>Enter the book ID first, followed by the remaining details.</p>
+            </div>
+
+            <form id="insertForm">
+
+                <!-- Book ID is now entered manually -->
+                <div class="form-group">
+                    <label for="book_id">Book ID *</label>
+                    <input
+                        type="number"
+                        id="book_id"
+                        name="book_id"
+                        placeholder="Enter book ID"
+                        min="1"
+                        step="1"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Book Title *</label>
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="Enter book title"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="author">Author Name *</label>
+                    <input
+                        type="text"
+                        id="author"
+                        name="author"
+                        placeholder="Enter author name"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category *</label>
+                    <input
+                        type="text"
+                        id="category"
+                        name="category"
+                        placeholder="Enter any category (e.g. Stories)"
+                        required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="price">Price (₹) *</label>
+                        <input
+                            type="number"
+                            id="price"
+                            name="price"
+                            placeholder="e.g. 250"
+                            min="0"
+                            step="0.01"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stock">Stock *</label>
+                        <input
+                            type="number"
+                            id="stock"
+                            name="stock"
+                            placeholder="Enter stock quantity"
+                            min="0"
+                            step="1"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-primary">
+                        ＋ Add Book
+                    </button>
+
+                    <button type="reset" class="btn btn-secondary">
+                        Clear Form
+                    </button>
+                </div>
+
+                <div id="message" class="message" role="status"></div>
+            </form>
+        </section>
+
+    </div>
+</main>
+
+<footer>
+    <div class="footer-top">
+        <div>
+            <h3>📚 Mamatha Bookstore</h3>
+            <p>A place for stories, knowledge and inspiration. Discover books and manage your collection in one place.</p>
+        </div>
+
+        <div>
+            <h3>Quick Links</h3>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="list.html">View Books</a>
+            </div>
+        </div>
+
+        <div>
+            <h3>Book Management</h3>
+            <div class="footer-links">
+                <a href="insert.html">Add Book</a>
+                <a href="update.html">Update Book</a>
+                <a href="delete.html">Delete Book</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright">© 2026 Mamatha Bookstore Management. All rights reserved.</div>
+</footer>
+
+<script>
+const form = document.getElementById("insertForm");
+const message = document.getElementById("message");
+
+form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    message.className = "message";
+    message.textContent = "";
+
+    const book = {
+        book_id: Number(document.getElementById("book_id").value),
+        title: document.getElementById("title").value.trim(),
+        author: document.getElementById("author").value.trim(),
+        category: document.getElementById("category").value,
+        price: Number(document.getElementById("price").value),
+        stock: document.getElementById("stock").value
+            ? Number(document.getElementById("stock").value)
+            : ""
+    };
+
+    if (
+        !Number.isInteger(book.book_id) ||
+        book.book_id < 1 ||
+        !book.title ||
+        !book.author ||
+        !book.category ||
+        document.getElementById("price").value === "" ||
+        !Number.isFinite(book.price) ||
+        book.price < 0 ||
+        document.getElementById("stock").value === "" ||
+        !Number.isInteger(book.stock) ||
+        book.stock < 0
+    ) {
+        message.className = "message error";
+        message.textContent = "Please enter valid details in all required fields.";
+        return;
+    }
+
+    try {
+        const response = await fetch("/books", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(book)
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+            throw new Error(
+                result.message ||
+                result.error ||
+                "Could not add the book."
+            );
+        }
+
+        const successMessage = "Book added successfully! Book ID: " + book.book_id;
+
+        form.reset();
+
+        message.className = "message success";
+        message.textContent = successMessage;
+
+    } catch (error) {
+        message.className = "message error";
+        message.textContent = error.message;
+    }
+});
+
+form.addEventListener("reset", function() {
+    message.className = "message";
+    message.textContent = "";
+});
+</script>
+
+</body>
+</html>
